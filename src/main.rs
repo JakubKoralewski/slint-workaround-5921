@@ -19,6 +19,14 @@ fn main() -> Result<(), slint::PlatformError> {
             } else {
                 when_false
             };
+            #[cfg(never)]
+            ui.set_model( // this doesn't help
+                slint::ModelRc::new(
+                    slint::VecModel::from_slice(
+                        &current_new_model.map(|s| slint::SharedString::from(s))
+                    )
+                )
+            );
             for index in 0..model.row_count() {
                 model.set_row_data(
                     index,
