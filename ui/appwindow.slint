@@ -1,0 +1,25 @@
+import {ComboBox, Switch} from "std-widgets.slint";
+
+export component Demo inherits Window {
+    preferred-height: 300px;
+    preferred-width: 500px;
+    in-out property <[string]> model: ["A", "B", "C"];
+
+    in-out property <string> selected-value <=> c.current-value;
+
+    callback switch-toggled(bool, int);
+
+    VerticalLayout {
+
+        s := Switch {
+            checked: false;
+            toggled() => {
+                switch-toggled(self.checked, c.current-index);
+            }
+        }
+
+        c := ComboBox {
+            model: model;
+        }
+    }
+}
